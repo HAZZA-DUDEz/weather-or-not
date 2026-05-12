@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weather or Not</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="weather-default">
+
+  <div class="background-scene" aria-hidden="true">
+    <div id="seasonScenery" class="season-scenery">
+      <img id="seasonSceneryImg" src="/images/backgrounds/spring.png" alt="">
+    </div>
+
+    <div class="sky-gradient"></div>
+    <div class="sky-glow"></div>
+
+    <div class="sky-arc-wrap">
+      <div class="sky-arc"></div>
+      <div id="sunOrb" class="sky-body sun-orb"></div>
+
+      <div id="moonOrb" class="moon-orb">
+        <img id="moonPhaseImg" class="moon-phase-img" src="/images/moon-phases/new.png" alt="Moon">
+      </div>
+    </div>
+
+    <div class="cloud-layer cloud-layer-back">
+      <div class="cloud cloud-a"></div>
+      <div class="cloud cloud-b"></div>
+      <div class="cloud cloud-c"></div>
+      <div class="cloud cloud-g"></div>
+      <div class="cloud cloud-h"></div>
+    </div>
+
+    <div class="cloud-layer cloud-layer-front">
+      <div class="cloud cloud-d"></div>
+      <div class="cloud cloud-e"></div>
+      <div class="cloud cloud-f"></div>
+      <div class="cloud cloud-i"></div>
+      <div class="cloud cloud-j"></div>
+    </div>
+
+    <div class="fog-layer" id="fogLayer"></div>
+    <div class="rain-layer" id="rainLayer"></div>
+    <div class="snow-layer" id="snowLayer"></div>
+    <div class="stars-layer" id="starsLayer"></div>
+    <div class="aurora-layer" id="auroraLayer"></div>
+    <div class="sky-effects-layer" id="skyEffectsLayer"></div>
+  </div>
+
+  <main class="page-shell">
+    <div class="logo-standalone">
+      <img src="logo.png" alt="Weather or Not logo" class="site-logo">
+    </div>
+
+    <section class="app-card">
+      <header class="app-header">
+        <p class="tagline">Search any city to see the current weather.</p>
+      </header>
+
+      <section class="search-section">
+        <form id="weatherForm" class="search-form">
+          <div class="search-bar-wrap">
+            <input
+              id="city"
+              type="text"
+              placeholder="Enter a city (ex: London, Beirut, Paris)"
+              autocomplete="off"
+              required
+            >
+            <button type="submit" class="search-btn">Search</button>
+          </div>
+        </form>
+
+        <div class="location-row">
+          <button type="button" id="locationBtn" class="location-btn">Use My Location</button>
+        </div>
+
+        <div id="recentSearches" class="recent-searches"></div>
+      </section>
+
+      <section id="result" class="result-section"></section>
+    </section>
+  </main>
+
+  <!-- Admin / Testing Panel -->
+  <button id="adminToggle" class="admin-toggle" type="button">
+    Admin / Test
+  </button>
+
+  <aside id="adminPanel" class="admin-panel hidden">
+    <div class="admin-panel-inner">
+      <div class="admin-header">
+        <h3>Testing Panel</h3>
+        <button id="adminClose" class="admin-close" type="button">×</button>
+      </div>
+
+      <div class="admin-grid">
+        <div class="admin-group">
+          <label for="adminTheme">Weather</label>
+          <select id="adminTheme">
+            <option value="">Live data</option>
+            <option value="clear">Clear</option>
+            <option value="cloudy">Cloudy</option>
+            <option value="rainy">Rainy</option>
+            <option value="stormy">Stormy</option>
+            <option value="windy">Windy</option>
+            <option value="cold">Cold</option>
+            <option value="warm">Warm</option>
+            <option value="foggy">Foggy</option>
+            <option value="misty">Misty</option>
+            <option value="snowy">Snowy</option>
+            <option value="sleety">Sleety</option>
+          </select>
+        </div>
+
+        <div class="admin-group">
+          <label for="adminTimeOfDay">Time of day</label>
+          <select id="adminTimeOfDay">
+            <option value="">Live data</option>
+            <option value="day">Day</option>
+            <option value="night">Night</option>
+            <option value="sunrise">Sunrise</option>
+            <option value="sunset">Sunset</option>
+          </select>
+        </div>
+
+        <div class="admin-group">
+          <label for="adminCloudCover">Cloud cover</label>
+          <input id="adminCloudCover" type="range" min="0" max="100" value="50">
+          <span id="adminCloudCoverValue">50%</span>
+        </div>
+
+        <div class="admin-group">
+          <label for="adminRain">Rain</label>
+          <input id="adminRain" type="range" min="0" max="10" step="0.1" value="0">
+          <span id="adminRainValue">0 mm</span>
+        </div>
+
+        <div class="admin-group">
+          <label for="adminVisibility">Visibility</label>
+          <input id="adminVisibility" type="range" min="100" max="10000" step="100" value="10000">
+          <span id="adminVisibilityValue">10000 m</span>
+        </div>
+
+        <div class="admin-group">
+          <label for="adminHumidity">Humidity</label>
+          <input id="adminHumidity" type="range" min="0" max="100" value="50">
+          <span id="adminHumidityValue">50%</span>
+        </div>
+
+        <div class="admin-group">
+          <label for="adminTemp">Temperature</label>
+          <input id="adminTemp" type="range" min="-10" max="40" value="15">
+          <span id="adminTempValue">15 °C</span>
+        </div>
+
+        <div class="admin-group">
+          <label for="adminWind">Wind</label>
+          <input id="adminWind" type="range" min="0" max="25" step="0.5" value="5">
+          <span id="adminWindValue">5 m/s</span>
+        </div>
+
+        <div class="admin-group">
+          <label for="adminMoonPhase">Moon phase</label>
+          <select id="adminMoonPhase">
+  <option value="new">New Moon</option>
+  <option value="young">Young Moon</option>
+  <option value="waxing-crescent">Waxing Crescent</option>
+  <option value="first-quarter">First Quarter</option>
+  <option value="waxing-gibbous">Waxing Gibbous</option>
+  <option value="full">Full Moon</option>
+  <option value="waning-gibbous">Waning Gibbous</option>
+  <option value="last-quarter">Last Quarter</option>
+  <option value="waning-crescent">Waning Crescent</option>
+  <option value="old">Old Moon</option>
+</select>
+        </div>
+
+        <div class="admin-group">
+          <label for="adminSkyEvent">Sky event</label>
+          <select id="adminSkyEvent">
+            <option value="none">None</option>
+            <option value="shooting-star">Shooting Star</option>
+            <option value="comet">Comet</option>
+            <option value="meteor-shower">Meteor Shower</option>
+            <option value="lunar-eclipse">Lunar Eclipse</option>
+            <option value="solar-eclipse">Solar Eclipse</option>
+          </select>
+        </div>
+
+        <div class="admin-group admin-check-group">
+          <label class="admin-check">
+            <input type="checkbox" id="adminOverrideSkyEvent">
+            <span>Override sky event</span>
+          </label>
+        </div>
+
+        <div class="admin-group admin-check-group">
+          <label class="admin-check">
+            <input type="checkbox" id="adminForceInvalidSkyEvent">
+            <span>Force invalid sky event for testing</span>
+          </label>
+        </div>
+        <div class="admin-group admin-check-group">
+          <label class="admin-check">
+            <input type="checkbox" id="adminShowStars" checked>
+            <span>Show stars</span>
+          </label>
+        </div>
+
+        <div class="admin-group admin-check-group">
+          <label class="admin-check">
+            <input type="checkbox" id="adminShowSunMoon" checked>
+            <span>Show sun / moon</span>
+          </label>
+        </div>
+
+        <div class="admin-group admin-check-group">
+          <label class="admin-check">
+            <input type="checkbox" id="adminShowRainbow">
+            <span>Force rainbow test</span>
+          </label>
+        </div>
+
+        <div class="admin-group admin-check-group">
+          <label class="admin-check">
+            <input type="checkbox" id="adminForceAurora">
+            <span>Force aurora test</span>
+          </label>
+        </div>
+
+      </div>
+
+      <div class="admin-actions">
+        <button id="adminApply" type="button">Apply Test Scene</button>
+        <button id="adminReset" type="button">Back to Live Data</button>
+      </div>
+    </div>
+  </aside>
+
+  <footer class="site-footer">
+    <p>© 2026 Weather or Not. All rights reserved.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
