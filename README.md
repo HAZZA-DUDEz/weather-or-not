@@ -1,5 +1,4 @@
-<img width="1154" height="754" alt="image" src="https://github.com/user-attachments/assets/087b66c7-5a45-4bd9-8e6e-bc38353983b4" />
-
+<img width="876" height="874" alt="logo" src="https://github.com/user-attachments/assets/1c58d9c0-f722-4776-9cfc-61c6ecbf3523" />
 
 # Weather or Not
 
@@ -27,6 +26,14 @@ Weather or Not is a Node.js and Express weather app that uses the Open-Meteo API
 - CSS
 - JavaScript
 - Open-Meteo API
+
+## Screenshots
+
+<img width="1154" height="754" alt="image" src="https://github.com/user-attachments/assets/087b66c7-5a45-4bd9-8e6e-bc38353983b4" />
+
+<img width="1312" height="758" alt="image" src="https://github.com/user-attachments/assets/18ac8d05-20ed-4371-9636-cbe23faaf223" />
+
+<img width="1312" height="759" alt="image" src="https://github.com/user-attachments/assets/f96e4514-9724-4909-958c-41f63656f8fa" />
 
 ## How to Run
 
