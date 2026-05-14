@@ -1,5 +1,3 @@
-<img width="876" height="874" alt="logo" src="https://github.com/user-attachments/assets/1c58d9c0-f722-4776-9cfc-61c6ecbf3523" />
-
 # Weather or Not
 
 Weather or Not is a Node.js and Express weather app that uses the Open-Meteo API to show current weather, forecasts, and animated weather scenes.
